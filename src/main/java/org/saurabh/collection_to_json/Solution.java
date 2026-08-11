@@ -49,9 +49,8 @@ public class Solution {
                 if(count > 0){
                     sb.append(",");
                 }
-                sb.append("\"");
                 toJson(e.getKey(), sb);
-                sb.append("\" : ");
+                sb.append(":");
                 toJson(e.getValue(), sb);
                 count++;
             }
@@ -64,7 +63,7 @@ public class Solution {
     public static void main(String[] args) {
         Solution s = new Solution();
 
-        record Example(String name, Collection<?> input, String expected) {}
+        record Example(String name, Object input, String expected) {}
 
         Example[] examples = new Example[]{
                 new Example("null collection",        null,                   ""),
@@ -72,9 +71,9 @@ public class Solution {
                 new Example("list of strings",        List.of("a", "b"),      "[\"a\",\"b\"]"),
                 new Example("empty list",             List.of(),              "[]"),
                 new Example("set of numbers",         Set.of(1, 2),           "[1,2]"),
-                //new Example("map",                    Map.of("k", 1),         "{\"k\":1}"),
+                new Example("map",                    Map.of("k", 1),         "{\"k\":1}"),
                 new Example("nested list",            List.of(List.of(1, 2)), "[[1,2]]"),
-                //new Example("mixed list",             List.of(1, "x", null),  "[1,\"x\",null]"),
+                new Example("mixed list",             Arrays.asList(1, "x", null), "[1,\"x\",null]"),
         };
 
         int passed = 0;
