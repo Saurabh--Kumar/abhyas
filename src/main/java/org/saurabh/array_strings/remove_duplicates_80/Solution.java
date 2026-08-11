@@ -1,4 +1,4 @@
-package org.saurabh.remove_duplicates_80;
+package org.saurabh.array_strings.remove_duplicates_80;
 
 class Solution {
     public int removeDuplicates(int[] nums) {

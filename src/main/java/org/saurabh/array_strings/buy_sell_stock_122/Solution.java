@@ -1,4 +1,4 @@
-package org.saurabh.buy_sell_stock_122;
+package org.saurabh.array_strings.buy_sell_stock_122;
 
 public class Solution {
 
