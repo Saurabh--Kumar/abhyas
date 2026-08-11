@@ -14,7 +14,7 @@ public class Solution {
 
     private void toJson(Object c, StringBuilder sb) {
         if(c == null){
-            sb.append("");
+            sb.append("null");
             return;
         }
 
@@ -22,14 +22,17 @@ public class Solution {
             sb.append((Number) c);
             return;
         } else if(c instanceof CharSequence){
-            sb.append("\"" + (String) c + "\"");
+            sb.append("\"" + (CharSequence) c + "\"");
             return;
         } else if(c instanceof Boolean){
             sb.append(c);
             return;
-        } else if(c instanceof Iterable<?>){
+        } else if(c instanceof Character){
+            sb.append("\"" + c + "\"");
+            return;
+        }else if(c instanceof Iterable<?>){
             sb.append("[");
-            Iterable iterable = (Iterable) c;
+            Iterable<?> iterable = (Iterable) c;
             int count = 0;
             for(Object o : iterable){
                 if(count > 0){
@@ -42,10 +45,10 @@ public class Solution {
 
         } else if(c instanceof Map<?,?>){
             sb.append("{");
-            Map map = (Map) c;
+            Map<?,?> map = (Map) c;
             int count = 0;
             for(Object o : map.entrySet()){
-                Map.Entry e = (Map.Entry) o;
+                Map.Entry<?,?> e = (Map.Entry) o;
                 if(count > 0){
                     sb.append(",");
                 }
@@ -66,7 +69,7 @@ public class Solution {
         record Example(String name, Object input, String expected) {}
 
         Example[] examples = new Example[]{
-                new Example("null collection",        null,                   ""),
+                new Example("null collection",        null,                   "null"),
                 new Example("list of numbers",        List.of(1, 2, 3),       "[1,2,3]"),
                 new Example("list of strings",        List.of("a", "b"),      "[\"a\",\"b\"]"),
                 new Example("empty list",             List.of(),              "[]"),
@@ -74,6 +77,11 @@ public class Solution {
                 new Example("map",                    Map.of("k", 1),         "{\"k\":1}"),
                 new Example("nested list",            List.of(List.of(1, 2)), "[[1,2]]"),
                 new Example("mixed list",             Arrays.asList(1, "x", null), "[1,\"x\",null]"),
+                new Example("map of list",            Map.of("nums", List.of(1, 2, 3)), "{\"nums\":[1,2,3]}"),
+                new Example("list of maps",           List.of(Map.of("a", 1), Map.of("b", 2)), "[{\"a\":1},{\"b\":2}]"),
+                new Example("map of list of sets",    Map.of("s", List.of(Set.of(1, 2), Set.of(3))), "{\"s\":[[1,2],[3]]}"),
+                new Example("arraylist of maps",      new ArrayList<>(List.of(Map.of("x", 1))), "[{\"x\":1}]"),
+                new Example("deeply nested",          Map.of("data", List.of(Set.of(new ArrayList<>(List.of(Map.of("k", 1)))))), "{\"data\":[[[{\"k\":1}]]]}"),
         };
 
         int passed = 0;
