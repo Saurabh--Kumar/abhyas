@@ -32,6 +32,7 @@ class RandomizedSet {
         }
         int randomListIndex = randomMap.get(val);
         randomList.set(randomListIndex, randomList.get(size-1));
+        randomMap.put(randomList.get(randomListIndex), randomListIndex);
         randomList.remove(size-1);
         randomMap.remove(val);
         size--;
