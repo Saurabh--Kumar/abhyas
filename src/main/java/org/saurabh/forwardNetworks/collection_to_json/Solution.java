@@ -1,4 +1,4 @@
-package org.saurabh.collection_to_json;
+package org.saurabh.forwardNetworks.collection_to_json;
 
 import java.util.*;
 
