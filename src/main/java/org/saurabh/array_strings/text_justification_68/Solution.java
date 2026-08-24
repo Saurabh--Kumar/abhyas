@@ -69,19 +69,44 @@ class Solution {
         for(int i = 0; i < selectedWords.size(); i++){
             sb.append(selectedWords.get(i));
             if(i < spacing.size()){
-                sb.append(getSpace(spacing.get(i)));
+                sb.append(" ".repeat(spacing.get(i)));
             }
         }
 
         return sb.toString();
     }
 
-    private char[] getSpace(Integer size) {
-        char[] spaces = new char[size];
-        for(int i = 0; i < size; i++){
-            spaces[i] = ' ';
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        String[] words1 = {"What","must","be","acknowledgment","shall","be"};
+        int maxWidth1 = 16;
+        System.out.println("Test Case 1:");
+        System.out.println("Input: words = " + java.util.Arrays.toString(words1) + ", maxWidth = " + maxWidth1);
+        List<String> result1 = solution.fullJustify(words1, maxWidth1);
+        for (String line : result1) {
+            System.out.println("\"" + line + "\" (length: " + line.length() + ")");
         }
-        return spaces;
+        System.out.println();
+
+        String[] words2 = {"What", "must", "be", "acknowledgment", "shall", "be"};
+        int maxWidth2 = 16;
+        System.out.println("Test Case 2:");
+        System.out.println("Input: words = " + java.util.Arrays.toString(words2) + ", maxWidth = " + maxWidth2);
+        List<String> result2 = solution.fullJustify(words2, maxWidth2);
+        for (String line : result2) {
+            System.out.println("\"" + line + "\" (length: " + line.length() + ")");
+        }
+        System.out.println();
+
+        String[] words3 = {"Science", "is", "what", "we", "understand", "well", "enough", "to", "explain", "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do"};
+        int maxWidth3 = 20;
+        System.out.println("Test Case 3:");
+        System.out.println("Input: words = " + java.util.Arrays.toString(words3) + ", maxWidth = " + maxWidth3);
+        List<String> result3 = solution.fullJustify(words3, maxWidth3);
+        for (String line : result3) {
+            System.out.println("\"" + line + "\" (length: " + line.length() + ")");
+        }
     }
 
 
