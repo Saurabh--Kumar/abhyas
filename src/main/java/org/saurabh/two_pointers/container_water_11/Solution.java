@@ -1,4 +1,4 @@
-package org.saurabh.array_strings.container_water_11;
+package org.saurabh.two_pointers.container_water_11;
 
 public class Solution {
     public int maxArea(int[] height) {

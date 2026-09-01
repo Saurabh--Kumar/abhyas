@@ -1,4 +1,4 @@
-package org.saurabh.array_strings.sum_3;
+package org.saurabh.two_pointers.sum_3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
