@@ -6,39 +6,26 @@ import java.util.Map;
 public class Solution {
     public int lengthOfLongestSubstring(String s) {
         if(s.length() == 0) return 0;
-        Map<Character, Integer> charCount = new HashMap<>();
-        Character repetedChar = null;
-        int i = 0, j = 0;
+        Map<Character, Integer> lastCharPosition = new HashMap<>();
+        int i = 0;
         int longestSubStr = 1;
         char[] string = s.toCharArray();
 
-        while(true){
-            while(j < string.length && (! charCount.containsKey(string[j]) || charCount.get(string[j]) == 0)) {
-                charCount.put(string[j], 1);
-                longestSubStr = Math.max(longestSubStr, j-i+1);
-                j++;
-            }
-            if(j < string.length) {
-                repetedChar = string[j];
-            }
+        for(int j = 0; j< string.length; j++){
+           char c = string[j];
+           if(lastCharPosition.containsKey(c) && lastCharPosition.get(c) >= i){
+               i = lastCharPosition.get(c) +1;
+           }
+           lastCharPosition.put(c, j);
 
-            while(i <= j && repetedChar != null && string[i] != repetedChar) {
-                charCount.put(string[i], 0);
-                i++;
-            }
-            charCount.put(string[i], 1);
-            i++;
-            j++;
-
-            if(j >= string.length) {
-                break;
-            }
+           longestSubStr = Math.max(longestSubStr, j-i +1);
         }
+
         return longestSubStr;
     }
 
     public static void main(String[] args) {
         Solution s = new Solution();
-        System.out.println(s.lengthOfLongestSubstring("s"));
+        System.out.println(s.lengthOfLongestSubstring("baaabca"));
     }
 }
