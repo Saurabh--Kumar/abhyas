@@ -6,20 +6,14 @@ public class Solution {
         int i = 0, j = 0;
         int total = 0;
 
-        while(true){
-            while(j < nums.length && total < target){
-                total+= nums[j];
-                j++;
+        for(; j<nums.length; j++) {
+            if(total < target){
+                total += nums[j];
             }
-
-            while(i < nums.length && total >= target){
-                minLength = Math.min(minLength, j-i);
-                total -= nums[i];
+            while(total>=target && i <=j){
+                minLength = Math.min(j-i+1, minLength);
+                total-= nums[i];
                 i++;
-            }
-
-            if(j == nums.length){
-                break;
             }
         }
         if(minLength <= nums.length) {
@@ -31,6 +25,6 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution s = new Solution();
-        s.minSubArrayLen(7, new int[]{2,3,1,2,4,3});
+        System.out.println(s.minSubArrayLen(7, new int[]{2,3,1,2,4,3}));
     }
 }
